@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数字大师 - 猜数字游戏</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+        }
+        
+        .game-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        h1 {
+            color: #4a5568;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            color: #718096;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        
+        .game-area {
+            background: #f7fafc;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .input-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        #guessInput {
+            padding: 15px 20px;
+            font-size: 18px;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            width: 150px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        #guessInput:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .btn {
+            padding: 15px 25px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+        
+        .btn-secondary:hover {
+            background: #cbd5e0;
+        }
+        
+        #feedback {
+            margin: 20px 0;
+            font-size: 18px;
+            font-weight: 600;
+            min-height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #attempts {
+            font-size: 16px;
+            color: #718096;
+            margin-bottom: 20px;
+        }
+        
+        .hint-section {
+            background: #fff5f5;
+            border: 2px solid #fed7d7;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            display: none;
+        }
+        
+        .hint-section.show {
+            display: block;
+        }
+        
+        .leaderboard {
+            background: #f0fff4;
+            border: 2px solid #9ae6b4;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .leaderboard h3 {
+            color: #22543d;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .score-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #c6f6d5;
+        }
+        
+        .score-item:last-child {
+            border-bottom: none;
+        }
+        
+        .ad-section {
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .ad-section h4 {
+            color: #4a5568;
+            margin-bottom: 10px;
+        }
+        
+        .ad-section p {
+            color: #718096;
+            margin-bottom: 15px;
+        }
+        
+        .ad-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .btn-ad {
+            background: #4299e1;
+            color: white;
+        }
+        
+        .btn-ad:hover {
+            background: #3182ce;
+        }
+        
+        .btn-premium {
+            background: #38a169;
+            color: white;
+        }
+        
+        .btn-premium:hover {
+            background: #2f855a;
+        }
+        
+        .celebration {
+            font-size: 2em;
+            margin: 20px 0;
+            animation: bounce 1s ease-in-out;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            background: #edf2f7;
+            border-radius: 10px;
+            padding: 15px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #718096;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>🎯 数字大师</h1>
+        <p class="subtitle">挑战你的直觉，猜中神秘数字！</p>
+        
+        <div class="game-area">
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-value" id="totalGames">0</div>
+                    <div class="stat-label">总局数</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="bestScore">-</div>
+                    <div class="stat-label">最佳成绩</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="avgAttempts">-</div>
+                    <div class="stat-label">平均尝试</div>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <input type="number" id="guessInput" min="1" max="100" placeholder="1-100" autocomplete="off">
+                <button class="btn btn-primary" onclick="makeGuess()">猜测</button>
+                <button class="btn btn-secondary" onclick="newGame()">新游戏</button>
+            </div>
+            
+            <div id="feedback"></div>
+            <div id="attempts">开始你的第一次猜测吧！</div>
+            
+            <div class="hint-section" id="hintSection">
+                <p id="hintText"></p>
+            </div>
+        </div>
+        
+        <div class="leaderboard">
+            <h3>🏆 排行榜</h3>
+            <div id="leaderboardList">
+                <p style="color: #718096;">还没有记录，快来创造第一个记录吧！</p>
+            </div>
+        </div>
+        
+        <div class="ad-section">
+            <h4>💡 游戏支持</h4>
+            <p>观看广告获得提示，或付费获得更好的体验</p>
+            <div class="ad-buttons">
+                <button class="btn btn-ad" onclick="showHint()">获取提示</button>
+                <button class="btn btn-premium" onclick="removeAds()">去广告 (¥1)</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 游戏状态
+        let targetNumber = 0;
+        let attempts = 0;
+        let gameActive = false;
+        let hintUsed = false;
+        let totalGamesPlayed = 0;
+        let scores = [];
+        
+        // 初始化游戏
+        function initGame() {
+            targetNumber = Math.floor(Math.random() * 100) + 1;
+            attempts = 0;
+            gameActive = true;
+            hintUsed = false;
+            
+            document.getElementById('feedback').innerHTML = '';
+            document.getElementById('attempts').textContent = '开始你的第一次猜测吧！';
+            document.getElementById('guessInput').value = '';
+            document.getElementById('guessInput').focus();
+            document.getElementById('hintSection').classList.remove('show');
+            
+            loadGameData();
+            updateStats();
+        }
+        
+        // 加载游戏数据
+        function loadGameData() {
+            const savedScores = localStorage.getItem('numberMasterScores');
+            if (savedScores) {
+                scores = JSON.parse(savedScores);
+            }
+            
+            const savedGames = localStorage.getItem('numberMasterGames');
+            if (savedGames) {
+                totalGamesPlayed = parseInt(savedGames);
+            }
+        }
+        
+        // 保存游戏数据
+        function saveGameData() {
+            localStorage.setItem('numberMasterScores', JSON.stringify(scores));
+            localStorage.setItem('numberMasterGames', totalGamesPlayed.toString());
+        }
+        
+        // 更新统计信息
+        function updateStats() {
+            document.getElementById('totalGames').textContent = totalGamesPlayed;
+            
+            if (scores.length > 0) {
+                const bestScore = Math.min(...scores.map(s => s.attempts));
+                document.getElementById('bestScore').textContent = bestScore + '次';
+                
+                const avgAttempts = Math.round(scores.reduce((sum, s) => sum + s.attempts, 0) / scores.length);
+                document.getElementById('avgAttempts').textContent = avgAttempts + '次';
+            }
+        }
+        
+        // 更新排行榜
+        function updateLeaderboard() {
+            const leaderboardList = document.getElementById('leaderboardList');
+            
+            if (scores.length === 0) {
+                leaderboardList.innerHTML = '<p style="color: #718096;">还没有记录，快来创造第一个记录吧！</p>';
+                return;
+            }
+            
+            const topScores = scores.slice(0, 10);
+            leaderboardList.innerHTML = topScores.map((score, index) => 
+                `<div class="score-item">
+                    <span>${index + 1}. ${score.attempts}次尝试</span>
+                    <span>${score.date}</span>
+                </div>`
+            ).join('');
+        }
+        
+        // 进行猜测
+        function makeGuess() {
+            const guessInput = document.getElementById('guessInput');
+            const guess = parseInt(guessInput.value);
+            const feedback = document.getElementById('feedback');
+            
+            if (!gameActive) {
+                feedback.innerHTML = '<span style="color: #e53e3e;">请先开始新游戏！</span>';
+                return;
+            }
+            
+            if (isNaN(guess) || guess < 1 || guess > 100) {
+                feedback.innerHTML = '<span style="color: #e53e3e;">请输入1到100之间的数字！</span>';
+                return;
+            }
+            
+            attempts++;
+            document.getElementById('attempts').textContent = `第${attempts}次尝试`;
+            
+            if (guess === targetNumber) {
+                // 猜中了
+                gameActive = false;
+                totalGamesPlayed++;
+                
+                const score = {
+                    attempts: attempts,
+                    date: new Date().toLocaleDateString(),
+                    usedHint: hintUsed
+                };
+                
+                scores.push(score);
+                scores.sort((a, b) => a.attempts - b.attempts);
+                scores = scores.slice(0, 50); // 只保留前50个记录
+                
+                saveGameData();
+                updateStats();
+                updateLeaderboard();
+                
+                feedback.innerHTML = `
+                    <div class="celebration">🎉 恭喜！</div>
+                    <span style="color: #38a169;">答案就是${targetNumber}！你用了${attempts}次尝试</span>
+                `;
+                
+                guessInput.disabled = true;
+            } else if (guess < targetNumber) {
+                feedback.innerHTML = '<span style="color: #ed8936;">📈 太小了！再大一点</span>';
+            } else {
+                feedback.innerHTML = '<span style="color: #ed8936;">📉 太大了！再小一点</span>';
+            }
+            
+            guessInput.value = '';
+            guessInput.focus();
+        }
+        
+        // 新游戏
+        function newGame() {
+            initGame();
+        }
+        
+        // 显示提示
+        function showHint() {
+            if (!gameActive) {
+                alert('请先开始新游戏！');
+                return;
+            }
+            
+            if (hintUsed) {
+                alert('你已经使用过提示了！');
+                return;
+            }
+            
+            hintUsed = true;
+            const hintSection = document.getElementById('hintSection');
+            const hintText = document.getElementById('hintText');
+            
+            const difference = Math.abs(targetNumber - parseInt(document.getElementById('guessInput').value));
+            
+            if (difference <= 5) {
+                hintText.textContent = '🔥 非常接近了！';
+            } else if (difference <= 15) {
+                hintText.textContent = '🎯 很接近了！';
+            } else if (difference <= 30) {
+                hintText.textContent = '👍 还不错，继续努力！';
+            } else {
+                hintText.textContent = '💪 加油，你离目标不远！';
+            }
+            
+            hintSection.classList.add('show');
+        }
+        
+        // 去广告（模拟）
+        function removeAds() {
+            alert('付费去广告功能（模拟）\n\n实际应用中，这里会调用真实的支付接口\n支付成功后永久去除广告');
+        }
+        
+        // 键盘事件
+        document.getElementById('guessInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                makeGuess();
+            }
+        });
+        
+        // 页面加载时初始化
+        window.addEventListener('load', function() {
+            initGame();
+        });
+    </script>
+</body>
+</html>
