@@ -1,0 +1,167 @@
+.container {
+  padding: 40rpx 20rpx;
+}
+
+.title {
+  font-size: 60rpx;
+  font-weight: bold;
+  color: #4a5568;
+  text-align: center;
+  margin-bottom: 20rpx;
+}
+
+.subtitle {
+  font-size: 36rpx;
+  color: #718096;
+  text-align: center;
+  margin-bottom: 60rpx;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 30rpx;
+  padding: 50rpx;
+  margin-bottom: 40rpx;
+  box-shadow: 0 15rpx 35rpx rgba(0, 0, 0, 0.1);
+}
+
+.input-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30rpx;
+  margin-bottom: 40rpx;
+}
+
+.input-field {
+  padding: 35rpx;
+  font-size: 36rpx;
+  border: 4rpx solid #cbd5e0;
+  border-radius: 25rpx;
+  width: 350rpx;
+  text-align: center;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 8rpx rgba(102, 126, 234, 0.1);
+}
+
+.btn {
+  padding: 35rpx 60rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  border: none;
+  border-radius: 25rpx;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  margin: 20rpx 0;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.btn-primary:hover {
+  transform: translateY(-4rpx);
+  box-shadow: 0 20rpx 40rpx rgba(102, 126, 234, 0.3);
+}
+
+.btn-secondary {
+  background: #e2e8f0;
+  color: #4a5568;
+}
+
+.btn-secondary:hover {
+  background: #cbd5e0;
+}
+
+.feedback {
+  font-size: 40rpx;
+  font-weight: 600;
+  text-align: center;
+  margin: 40rpx 0;
+  padding: 40rpx;
+  border-radius: 20rpx;
+  min-height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feedback.success {
+  color: #38a169;
+  background: rgba(56, 161, 105, 0.1);
+}
+
+.feedback.warning {
+  color: #ed8936;
+  background: rgba(237, 137, 54, 0.1);
+}
+
+.feedback.error {
+  color: #e53e3e;
+  background: rgba(229, 62, 62, 0.1);
+}
+
+.stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 40rpx;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-label {
+  font-size: 28rpx;
+  color: #718096;
+  margin-bottom: 10rpx;
+}
+
+.stat-value {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #4a5568;
+}
+
+.share-section {
+  margin-top: 60rpx;
+}
+
+.share-btn {
+  background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+  color: white;
+  padding: 40rpx 80rpx;
+  border: none;
+  border-radius: 25rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.share-btn:hover {
+  transform: translateY(-4rpx);
+  box-shadow: 0 20rpx 40rpx rgba(72, 187, 120, 0.3);
+}
+
+.hint-section {
+  margin-top: 40rpx;
+  padding: 40rpx;
+  background: rgba(102, 126, 234, 0.1);
+  border-radius: 20rpx;
+}
+
+.hint-text {
+  font-size: 32rpx;
+  color: #4a5568;
+  text-align: center;
+}

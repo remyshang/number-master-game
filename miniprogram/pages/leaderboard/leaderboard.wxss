@@ -1,0 +1,137 @@
+.container {
+  padding: 40rpx 20rpx;
+}
+
+.title {
+  font-size: 60rpx;
+  font-weight: bold;
+  color: #4a5568;
+  text-align: center;
+  margin-bottom: 20rpx;
+}
+
+.subtitle {
+  font-size: 36rpx;
+  color: #718096;
+  text-align: center;
+  margin-bottom: 60rpx;
+}
+
+.stats-section {
+  display: flex;
+  justify-content: space-between;
+  gap: 20rpx;
+  margin-bottom: 60rpx;
+}
+
+.stat-card {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20rpx;
+  padding: 40rpx 20rpx;
+  text-align: center;
+  box-shadow: 0 10rpx 25rpx rgba(0, 0, 0, 0.08);
+}
+
+.stat-label {
+  font-size: 24rpx;
+  color: #718096;
+  margin-bottom: 10rpx;
+}
+
+.stat-value {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #667eea;
+}
+
+.leaderboard-list {
+  margin-bottom: 60rpx;
+}
+
+.list-item {
+  background: white;
+  border-radius: 20rpx;
+  padding: 40rpx;
+  margin-bottom: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 10rpx 25rpx rgba(0, 0, 0, 0.08);
+}
+
+.rank-number {
+  font-size: 60rpx;
+  font-weight: bold;
+  color: #667eea;
+  width: 100rpx;
+  text-align: center;
+}
+
+.rank-info {
+  flex: 1;
+  margin-left: 40rpx;
+}
+
+.rank-attempts {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #4a5568;
+}
+
+.rank-date {
+  font-size: 24rpx;
+  color: #718096;
+  margin-top: 10rpx;
+}
+
+.rank-badge {
+  padding: 20rpx 40rpx;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  font-weight: 600;
+}
+
+.rank-badge.perfect {
+  background: rgba(56, 161, 105, 0.1);
+  color: #38a169;
+}
+
+.rank-badge.hint {
+  background: rgba(237, 137, 54, 0.1);
+  color: #ed8936;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 120rpx 40rpx;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 20rpx;
+}
+
+.empty-text {
+  font-size: 32rpx;
+  color: #718096;
+}
+
+.share-section {
+  margin-top: 60rpx;
+}
+
+.share-btn {
+  background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+  color: white;
+  padding: 40rpx 80rpx;
+  border: none;
+  border-radius: 25rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.share-btn:hover {
+  transform: translateY(-4rpx);
+  box-shadow: 0 20rpx 40rpx rgba(72, 187, 120, 0.3);
+}

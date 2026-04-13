@@ -1,0 +1,66 @@
+<view class="container">
+  <view class="title">ℹ️ 关于数字大师</view>
+  
+  <view class="about-content">
+    <view class="about-title">游戏介绍</view>
+    <view class="about-text">
+      数字大师是一个简单有趣的猜数字游戏。系统会随机生成一个1到100之间的数字，你需要通过猜测来找到这个神秘数字。
+    </view>
+    
+    <view class="about-text">
+      游戏规则很简单：输入你的猜测，系统会告诉你猜的数字是太大还是太小，直到你找到正确的答案为止。
+    </view>
+    
+    <view class="about-text">
+      挑战自己，看看能用多少次猜中数字！创造属于你的最佳记录吧！
+    </view>
+
+    <view class="about-title">游戏特色</view>
+    <view class="about-text">
+      🎯 简单易懂的游戏规则<br>
+      📊 完整的统计系统<br>
+      🏆 排行榜功能<br>
+      💡 智能提示系统<br>
+      📱 社交分享功能
+    </view>
+
+    <view class="about-title">数据统计</view>
+    <view class="about-stats">
+      <view class="about-stat">
+        <view class="about-stat-value">{{stats.totalGames}}</view>
+        <view class="about-stat-label">游戏次数</view>
+      </view>
+      <view class="about-stat">
+        <view class="about-stat-value">{{stats.bestScore || '-'}}</view>
+        <view class="about-stat-label">最佳记录</view>
+      </view>
+      <view class="about-stat">
+        <view class="about-stat-value">{{stats.averageAttempts}}</view>
+        <view class="about-stat-label">平均尝试</view>
+      </view>
+    </view>
+
+    <view class="about-title">版本信息</view>
+    <view class="about-text">
+      版本：{{version}}<br>
+      发布日期：{{releaseDate}}
+    </view>
+
+    <view class="about-title">感谢支持</view>
+    <view class="about-text">
+      感谢你下载和使用数字大师！你的每一个游戏记录都是对我们最大的支持。
+    </view>
+  </view>
+
+  <view class="share-section">
+    <button class="share-btn" bindtap="shareGame">
+      📱 分享给朋友
+    </button>
+  </view>
+
+  <view class="support-section">
+    <button class="support-btn" bindtap="contactSupport">
+      💬 联系我们
+    </button>
+  </view>
+</view>

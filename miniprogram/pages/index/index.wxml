@@ -1,0 +1,48 @@
+<view class="container">
+  <view class="title">🎯 数字大师</view>
+  <view class="subtitle">挑战你的直觉，猜中神秘数字！</view>
+  
+  <view class="card">
+    <view class="input-group">
+      <input 
+        class="input-field" 
+        type="number" 
+        placeholder="1-100" 
+        value="{{inputValue}}"
+        bindinput="makeGuess"
+        confirm-type="done"
+      />
+      <button class="btn btn-primary" bindtap="makeGuess">猜测</button>
+      <button class="btn btn-secondary" bindtap="newGame">新游戏</button>
+    </view>
+    
+    <view class="feedback {{feedbackType}}">
+      {{feedback}}
+    </view>
+    
+    <view class="stats">
+      <view class="stat-item">
+        <div class="stat-label">尝试次数</div>
+        <div class="stat-value">{{attempts}}</div>
+      </view>
+      <view class="stat-item">
+        <div class="stat-label">最佳记录</div>
+        <div class="stat-value">{{bestScore || '-'}}</div>
+      </view>
+      <view class="stat-item">
+        <div class="stat-label">游戏次数</div>
+        <div class="stat-value">{{totalGames}}</div>
+      </view>
+    </view>
+  </view>
+
+  <view class="hint-section" wx:if="{{showHint}}">
+    <view class="hint-text">{{hintText}}</view>
+  </view>
+
+  <view class="share-section">
+    <button class="share-btn" bindtap="shareGame">
+      📱 分享给朋友
+    </button>
+  </view>
+</view>

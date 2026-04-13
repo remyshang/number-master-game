@@ -1,0 +1,44 @@
+<view class="container">
+  <view class="title">🏆 排行榜</view>
+  <view class="subtitle">看看谁是猜数字大师！</view>
+  
+  <view class="stats-section">
+    <view class="stat-card">
+      <view class="stat-label">总游戏次数</view>
+      <view class="stat-value">{{stats.totalGames}}</view>
+    </view>
+    <view class="stat-card">
+      <view class="stat-label">最佳记录</view>
+      <view class="stat-value">{{stats.bestScore || '-'}}</view>
+    </view>
+    <view class="stat-card">
+      <view class="stat-label">平均尝试</view>
+      <view class="stat-value">{{stats.averageAttempts}}</view>
+    </view>
+  </view>
+
+  <view class="leaderboard-list">
+    <block wx:for="{{leaderboard}}" wx:key="timestamp">
+      <view class="list-item">
+        <view class="rank-number">{{formatRank(index)}}</view>
+        <view class="rank-info">
+          <view class="rank-attempts">{{item.attempts}} 次尝试</view>
+          <view class="rank-date">{{item.date}}</view>
+        </view>
+        <view class="rank-badge {{getBadgeClass(item)}}">
+          {{getBadgeText(item)}}
+        </view>
+      </view>
+    </block>
+    
+    <view wx:if="{{leaderboard.length === 0}}" class="empty-state">
+      <view class="empty-text">还没有记录，快去创造第一个记录吧！</view>
+    </view>
+  </view>
+
+  <view class="share-section">
+    <button class="share-btn" bindtap="shareLeaderboard">
+      📱 分享排行榜
+    </button>
+  </view>
+</view>
